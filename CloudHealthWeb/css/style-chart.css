@@ -1,0 +1,124 @@
+/* 전체 레이아웃 */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 1fr; /* 4등분 레이아웃 */
+    grid-gap: 10px;
+    height: 100vh;
+    padding: 10px;
+  }
+  
+  /* 좌측 사이드바 */
+  .sidebar {
+    width: 15%;
+    background: #2d3436;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border-right: 1px solid #ddd;
+  }
+  /* .sidebar {
+    background-color: #f4f4f4;
+    padding: 10px;
+  } */
+
+  .sidebar .logo h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #00cec9;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar .menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar .menu ul li a {
+    text-decoration: none;
+    color: #dfe6e9;
+    font-size: 16px;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .sidebar .menu ul li a:hover {
+    background: #00cec9;
+  }
+  
+  /* 중앙 패널 1 */
+  .main-panel-1 {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .panel-header .add-btn {
+    background: #00cec9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .panel-header .add-btn:hover {
+    background: #0984e3;
+  }
+  
+  .card {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  /* 중앙 패널 2 */
+  .main-panel-2 {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .main-panel-2 .card {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+  }
+  
+  /* 우측 사이드바 */
+  .right-sidebar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .right-sidebar .calendar table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  
+  .right-sidebar th, .right-sidebar td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
