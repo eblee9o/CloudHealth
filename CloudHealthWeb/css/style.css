@@ -17,6 +17,10 @@
 	width: 100%;
 	height: auto;
 }
+.image.doctor img {
+	width: 50%;
+	height: auto;
+}
 	body, input, select, textarea {
 		color: #555f66;
 		font-family: "Roboto", Helvetica, sans-serif;
@@ -625,6 +629,7 @@
 	table {
 		margin: 0 0 2em 0;
 		width: 100%;
+
 	}
 
 		table tbody tr {
@@ -639,6 +644,8 @@
 
 		table td {
 			padding: 0.75em 0.75em;
+			text-align: left;
+			
 		}
 
 		table th {
@@ -842,7 +849,6 @@
 	.wrapper {
 		padding: 6em 0 4em 0;
 	}
-
 		.wrapper.style1 {
 			background: #fff;
 			color: #555f66;
