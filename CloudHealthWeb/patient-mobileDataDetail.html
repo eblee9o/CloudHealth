@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<!--
+Ion by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>내 진료 내역 확인</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"> <!--모바일 화면에 맞추기(네이버 기준)-->
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<!--그래프 및 차트-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css">
+			<link rel="stylesheet" href="css/style.css">
+			<link rel="stylesheet" href="css/style-xlarge.css">
+		</noscript>
+		<!DOCTYPE html>
+		<html lang="ko">
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>내 진료 내역 확인</title>
+			<!DOCTYPE html>
+			<html lang="ko">
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Insurance Screen</title>
+		</head>
+	<body id="top">
+	<!-- Main -->
+		<section id="main" class="wrapper style1">
+		<div class="container big">
+			<div class="row quarter">
+				<div class="2u">
+					<section><h3>2022-02-28 </h3>
+						<p class="info-header">@@의원 | 침구과</p>
+						<div class="container">
+							<div class="card">
+								<div class="card-header">
+									<div>
+										<label for="scales">2022-02-28
+										<button class="action-button">외래</button></label>
+									</div>
+								</div>
+								<div class="card-content">
+									<br>
+									<p>내원일수: 1<br>청구보험료 총금액: 63830<br>심사적용금액: 63830<br>주행거리: 85350 (전일대비: 약한 피해 및 간접)</p>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header">
+									<div>
+										<label for="scales"><h3>AI 데이터 보기</h3></label>
+									</div>
+								</div>
+								<div class="card-content">
+									그래프 넣기 
+									<div id="chart-container">
+										<canvas id="radar-chart" width="800" height="600"></canvas>
+									</div>
+									<script>
+										new Chart(document.getElementById("radar-chart"), {
+											type: 'radar',
+											data: {
+											labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+											datasets: [
+												{
+												label: "1950",
+												fill: true,
+												backgroundColor: "rgba(179,181,198,0.2)",
+												borderColor: "rgba(179,181,198,1)",
+												pointBorderColor: "#fff",
+												pointBackgroundColor: "rgba(179,181,198,1)",
+												data: [8.77,55.61,21.69,6.62,6.82]
+												}, {
+												label: "2050",
+												fill: true,
+												backgroundColor: "rgba(255,99,132,0.2)",
+												borderColor: "rgba(255,99,132,1)",
+												pointBorderColor: "#fff",
+												pointBackgroundColor: "rgba(255,99,132,1)",
+												pointBorderColor: "#fff",
+												data: [25.48,54.16,7.61,8.06,4.45]
+												}
+											]
+											},
+											options: {
+											title: {
+												display: true,
+												text: 'Distribution in % of world population'
+											}
+											}
+										});
+									</script>
+								</div>
+							</div>
+					</section>
+				</div>
+			</div>	
+		</div>	
+		</section>			
+		<div class="copyright">
+			Powered by: <a href="https://templated.co/">TEMPLATED.CO</a>
+		</div>
+	</body>
+</html>
