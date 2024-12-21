@@ -92,7 +92,7 @@ Resources:
     DependsOn: SeoulAlb
     Properties: 
       ImageId: !FindInMap [AmiMap, !Ref "AWS::Region", Ami]
-      KeyName: "health-key.ppk"
+      KeyName: "health-key"
       InstanceType: t2.micro
       SecurityGroupIds: 
         - !Ref SeoulWebSg
@@ -243,6 +243,28 @@ Resources:
           if __name__ == "__main__":
               app.run(host="0.0.0.0", port=80, debug=True)' > /app/app.py
           nohup python3 /app/app.py &
+  #DB용 인스턴스 
+  SeoulPubWeb5:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      ImageId: !FindInMap [AmiMap, !Ref "AWS::Region", Ami]
+      KeyName: "db-key"
+      InstanceType: t2.micro
+      SecurityGroupIds: 
+        - !Ref SeoulNatWebSg
+      SubnetId: !ImportValue SeoulPubSn5Id 
+      Tags:
+        - Key : Name
+          Value : Seoul-DB
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          echo "p@ssw0rd" | passwd --stdin root
+          sed -i "s/^#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_config
+          sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+          systemctl restart sshd
+          yum update -y
+
 
 #ALB 생성 : pri3,4
 #alb tg
@@ -286,6 +308,5 @@ Resources:
       LoadBalancerArn: !Ref SeoulAlb
       Port: 80
       Protocol: HTTP
-
 
 ...
