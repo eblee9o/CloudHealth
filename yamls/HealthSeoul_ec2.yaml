@@ -166,7 +166,6 @@ Resources:
               </style>
           </head>
           <body>
-
               <h1>Data Table</h1>
               <button id="fetch-data">Fetch Data</button>
               <div id="result">
@@ -345,7 +344,6 @@ Resources:
               cursor.execute(query)
               rows = cursor.fetchall()
 
-
               result=[]
               for row in rows:
                   print(row)
@@ -355,6 +353,7 @@ Resources:
           if __name__ == "__main__":
               app.run(host="0.0.0.0", port=80, debug=True)' > /app/app.py
           nohup python3 /app/app.py &
+  
   #DB용 인스턴스 
   SeoulPubWeb5:
     Type: 'AWS::EC2::Instance'
@@ -376,7 +375,12 @@ Resources:
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           yum update -y
-
+          amazon-linux-extras install postgresql10 epel -y
+          yum install postgresql-server postgresql-devel -y
+          /usr/bin/postgresql-setup --initdb
+          sed -i "s/^#listen_addresses = '*'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
+          sed -i "s/^host    all             all             127.0.0.1/32            ident/#host    all             all             0.0.0.0/0            md5/g" /var/lib/pgsql/data/pg_hba.conf
+          systemctl restart postgresql
 
 #ALB 생성 : pri3,4
 #alb tg
