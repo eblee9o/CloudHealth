@@ -111,6 +111,7 @@ Resources:
           python3.7 -m pip install --upgrade pip
           pip install Flask
           pip install requests==2.6
+          
           mkdir -p /app
           ALB_DNS_NAME="{{!GetAtt SeoulAlb.DNSName}}"
           echo '
@@ -142,35 +143,90 @@ Resources:
           PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
           echo '
           <!DOCTYPE html>
-          <html lang="ko">
+          <html lang="en">
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Hello World</title>
+              <title>Fetch Data and Display Table</title>
               <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+              <style>
+                  table {
+                      width: 100%;
+                      border-collapse: collapse;
+                      margin-top: 20px;
+                  }
+                  th, td {
+                      border: 1px solid #ddd;
+                      padding: 8px;
+                      text-align: left;
+                  }
+                  th {
+                      background-color: #f2f2f2;
+                  }
+              </style>
           </head>
           <body>
-              <h1>Hello, World!</h1>
-              <p>이 페이지는 Flask로 만든 HTML입니다.</p>
-              <button id="fetch-data">데이터 가져오기</button>
-              <div id="result"></div>
+
+              <h1>Data Table</h1>
+              <button id="fetch-data">Fetch Data</button>
+              <div id="result">
+                  <!-- 테이블이 여기에 렌더링됩니다 -->
+              </div>
 
               <script>
                   $(document).ready(function() {
                       $("#fetch-data").click(function() {
                           $.ajax({
-                              url: "http://$PUBLIC_IP/api",
+                              url: "http://$PUBLIC_IP/api", // API 엔드포인트를 여기에 넣으세요
                               method: "GET",
-                              success: function(data) {
-                                  $("#result").html(JSON.stringify(data, null, 2));
+                              success: function(response) {
+                                  const data = response.message;
+                                  if (Array.isArray(data)) {
+                                      renderTable(data);
+                                  } else {
+                                      $("#result").html("Error: Expected an array of data.");
+                                  }
                               },
                               error: function(xhr, status, error) {
-                                  $("#result").html("오류:"  + error);
+                                  $("#result").html("오류: " + error);
                               }
                           });
                       });
+
+                      function renderTable(data) {
+                          if (data.length === 0) {
+                              $("#result").html("No data available.");
+                              return;
+                          }
+
+                          // 테이블 시작 태그
+                          let table = "<table><thead><tr>";
+
+                          // 테이블 헤더 생성
+                          const headers = ["ID", "Active", "First Name", "Last Name", "Gender", "Birth Date", "Address", "City", "State", "Postal Code", "Phone", "Email", "Created At", "Updated At"];
+                          headers.forEach(header => {
+                              table += `<th>${header}</th>`;
+                          });
+
+                          table += "</tr></thead><tbody>";
+
+                          // 테이블 행 데이터 추가
+                          data.forEach(row => {
+                              table += "<tr>";
+                              row.forEach(value => {
+                                  table += `<td>${value}</td>`;
+                              });
+                              table += "</tr>";
+                          });
+
+                          table += "</tbody></table>";
+
+                          // 테이블 렌더링
+                          $("#result").html(table);
+                      }
                   });
               </script>
+
           </body>
           </html>' > /app/templates/index.html               
 
@@ -194,16 +250,44 @@ Resources:
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           yum update -y
+          yum install -y gcc
+          yum install postgresql-devel -y
           python3.7 -m pip install --upgrade pip
           pip install Flask
+          pip install psycopg2-binary
           mkdir -p /app
           echo '
+          import psycopg2
+
           from flask import Flask, jsonify
           app = Flask(__name__)
 
           @app.route("/")
           def hello_world():
-              return jsonify(message="Hello, World111!")
+              result = getDb()
+
+              return jsonify(message=result)
+
+          def getDb():
+              # PostgreSQL 데이터베이스에 연결
+              connection = psycopg2.connect(
+                  host='10.1.5.19',
+                  port='5432',
+                  database='health',
+                  user='postgres',
+                  password='qwer1234'
+              )
+              cursor = connection.cursor()
+              query = "SELECT * FROM Patient;"  # 데이터를 가져올 테이블
+              cursor.execute(query)
+              rows = cursor.fetchall()
+
+
+              result=[]
+              for row in rows:
+                  print(row)
+                  result.append(row)
+              return result
 
           if __name__ == "__main__":
               app.run(host="0.0.0.0", port=80, debug=True)' > /app/app.py
@@ -229,16 +313,44 @@ Resources:
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           yum update -y
+          yum install postgresql-devel -y
+          yum install -y gcc
           python3.7 -m pip install --upgrade pip
           pip install Flask
+          pip install psycopg2-binary
           mkdir -p /app
           echo '
+          import psycopg2
+
           from flask import Flask, jsonify
           app = Flask(__name__)
 
           @app.route("/")
           def hello_world():
-              return jsonify(message="Hello, World222!")
+              result = getDb()
+
+              return jsonify(message=result)
+
+          def getDb():
+              # PostgreSQL 데이터베이스에 연결
+              connection = psycopg2.connect(
+                  host='10.1.5.19',
+                  port='5432',
+                  database='health',
+                  user='postgres',
+                  password='qwer1234'
+              )
+              cursor = connection.cursor()
+              query = "SELECT * FROM Patient;"  # 데이터를 가져올 테이블
+              cursor.execute(query)
+              rows = cursor.fetchall()
+
+
+              result=[]
+              for row in rows:
+                  print(row)
+                  result.append(row)
+              return result
 
           if __name__ == "__main__":
               app.run(host="0.0.0.0", port=80, debug=True)' > /app/app.py
