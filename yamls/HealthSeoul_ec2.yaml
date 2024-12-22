@@ -381,6 +381,28 @@ Resources:
           sed -i "s/^#listen_addresses = '*'/listen_addresses = '*'/g" /var/lib/pgsql/data/postgresql.conf
           sed -i "s/^host    all             all             127.0.0.1/32            ident/#host    all             all             0.0.0.0/0            md5/g" /var/lib/pgsql/data/pg_hba.conf
           systemctl restart postgresql
+#Batch용
+  SeoulPriWeb6:
+    Type: 'AWS::EC2::Instance'
+    Properties: 
+      ImageId: !FindInMap [AmiMap, !Ref "AWS::Region", Ami]
+      InstanceType: t2.micro
+      SecurityGroupIds: 
+        - !Ref SeoulNatWebSg
+      SubnetId: !ImportValue SeoulPubSn5Id 
+      Tags:
+        - Key : Name
+          Value : Seoul-DB-Bathch
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          echo "p@ssw0rd" | passwd --stdin root
+          sed -i "s/^#PermitRootLogin yes/PermitRootLogin yes/g" /etc/ssh/sshd_config
+          sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+          systemctl restart sshd
+          yum update -y
+          yum install java-11-amazon-corretto
+
 
 #ALB 생성 : pri3,4
 #alb tg
