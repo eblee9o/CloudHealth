@@ -1,1 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnosis Prediction</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section, .graph-section {
+            width: 48%;
+        }
+
+        .form-section label, .form-section input, .form-section select, .form-section button {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .form-section button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-section button:hover {
+            background-color: #0056b3;
+        }
+
+        .graph-section {
+            text-align: center;
+        }
+
+        .scrollable-results {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #fff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diagnosis Prediction</h1>
+
+    <div class="container">
+        <div class="form-section">
+            <h2>Patient Information</h2>
+            <form id="diagnosisForm">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="1" max="100" step="1">
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="symptom">Symptom:</label>
+                <input type="text" id="symptom" name="symptom" placeholder="Enter symptom">
+
+                <label for="symptom_severity">Symptom Severity:</label>
+                <input type="number" id="symptom_severity" name="symptom_severity" min="1" max="5" step="1">
+
+                <label for="current_medication">Current Medication:</label>
+                <input type="text" id="current_medication" name="current_medication" placeholder="Enter medication">
+
+                <button type="button" onclick="showResults()">Predict</button>
+            </form>
+        </div>
+
+        <div class="graph-section">
+            <h2>Diagnosis Result</h2>
+            <h1 id="mainPrediction">Asthma</h1>
+            <canvas id="barChart" width="400" height="200"></canvas>
+
+            <div class="scrollable-results">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Condition</th>
+                            <th>Confidence (%)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTable">
+                        <!-- Dynamic rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="status">
+        Status: Successful
+    </div>
+
+    <div class="footer-note">
+        Execution Time: 244ms | Request Time: 2024-12-12 06:15:11 PM
+    </div>
+
+    <script>
+        // JSON 데이터 (제공된 데이터 기반)
+        const jsonData = {
+            "Asthma": {
+                "Asthma": 0.66931,
+                "Bronchitis": 0.25000,
+                "Pneumonia": 0.03000,
+                "A1C": 0.00217,
+                "BP": 0.00526
+            }
+        };
+
+        // 결과 표시 함수
+        function showResults() {
+            const prediction = "Asthma";
+            const tableBody = document.getElementById('resultsTable');
+            const mainPrediction = document.getElementById('mainPrediction');
+
+            // 메인 예측 결과 업데이트
+            mainPrediction.textContent = prediction;
+
+            // 테이블 업데이트
+            tableBody.innerHTML = ''; // 기존 데이터를 초기화
+            const asthmaPredictions = jsonData["Asthma"];
+            Object.keys(asthmaPredictions).forEach(condition => {
+                const confidence = asthmaPredictions[condition];
+                const row = `
+                    <tr>
+                        <td>${condition}</td>
+                        <td>${(confidence * 100).toFixed(2)}%</td>
+                        <td>${condition === "Asthma" ? "Primary Diagnosis" : "Secondary Diagnosis"}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+
+            // 그래프 업데이트
+            updateBarChart(asthmaPredictions);
+        }
+
+        // 그래프 생성 함수
+        function updateBarChart(data) {
+            const labels = Object.keys(data);
+            const chartData = Object.values(data).map(value => (value * 100).toFixed(2));
+            const ctx = document.getElementById('barChart').getContext('2d');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Confidence (%)',
+                        data: chartData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // 페이지 로드 시 초기 결과 표시
+        showResults();
+    </script>
+</body>
+</html>
 
