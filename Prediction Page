@@ -135,7 +135,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Condition</th>
+                            <th>Dignosis</th>
                             <th>Confidence (%)</th>
                             <th>Notes</th>
                         </tr>
@@ -146,10 +146,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
-    <div class="status">
-        Status: Successful
     </div>
 
     <div class="footer-note">
@@ -178,18 +174,30 @@
             mainPrediction.textContent = prediction;
 
             // 테이블 업데이트
-            tableBody.innerHTML = ''; // 기존 데이터를 초기화
+            tableBody.innerHTML = ''; 
             const asthmaPredictions = jsonData["Asthma"];
             Object.keys(asthmaPredictions).forEach(condition => {
                 const confidence = asthmaPredictions[condition];
+                let note;
+
+                if (condition === "Asthma"){
+                    note = "Primary Dignosis";
+                } else if (confidence >0.1){ //10% 이상일 경우
+                    note ="Likely Related Condition";
+                } else {
+                    note ="Less Likely Condition";
+                }
+
                 const row = `
                     <tr>
                         <td>${condition}</td>
                         <td>${(confidence * 100).toFixed(2)}%</td>
-                        <td>${condition === "Asthma" ? "Primary Diagnosis" : "Secondary Diagnosis"}</td>
-                    </tr>
+                        <td>${note}</td>
+                    </tr>    
                 `;
                 tableBody.innerHTML += row;
+                
+        
             });
 
             // 그래프 업데이트
@@ -230,4 +238,3 @@
     </script>
 </body>
 </html>
-
