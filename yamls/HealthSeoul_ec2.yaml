@@ -401,7 +401,7 @@ Resources:
           sed -i "s/^PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
           systemctl restart sshd
           yum update -y
-          yum install java-11-amazon-corretto
+          yum install -y java-11-amazon-corretto
 
 
 #ALB 생성 : pri3,4
