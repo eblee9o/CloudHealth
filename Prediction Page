@@ -27,16 +27,22 @@
 
         .container {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: flex-start;
-            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
+            background: rgba(255,255,255,0.9);
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        .form-section, .graph-section {
-            width: 48%;
+        .form-section{
+            width: 30%;
+            margin-left: 10px;
+        }
+        .graph-section{
+            width: 40%;
+            margin-left: 0;
+            text-align: center;
         }
 
         .form-section label, .form-section input, .form-section select, .form-section button {
@@ -103,49 +109,66 @@
             color: #777;
             margin-top: 30px;
         }
+        .chat-section{
+            width: 25%;
+            margin-left: 10px;
+            text-align: left;
+        }
+        .chat-box{
+            max-height: 300px;
+            overflow-y: scroll;
+            border:1px soild #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .chat-box p strong{
+            color:#007BFF;
+        }
     </style>
 </head>
 <body>
-    <h1>Diagnosis Prediction</h1>
+    <h1>진단 예측</h1>
 
     <div class="container">
         <div class="form-section">
-            <h2>Patient Information</h2>
+            <h2>환자 정보</h2>
             <form id="diagnosisForm">
-                <label for="age">Age:</label>
+                <label for="age">나이:</label>
                 <input type="number" id="age" name="age" min="1" max="100" step="1">
 
-                <label for="gender">Gender:</label>
+                <label for="gender">성별:</label>
                 <select id="gender" name="gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
 
-                <label for="symptom">Symptom:</label>
+                <label for="symptom">증상:</label>
                 <input type="text" id="symptom" name="symptom" placeholder="Enter symptom">
 
-                <label for="symptom_severity">Symptom Severity:</label>
+                <label for="symptom_severity">증상 심각도:</label>
                 <input type="number" id="symptom_severity" name="symptom_severity" min="1" max="5" step="1">
 
-                <label for="current_medication">Current Medication:</label>
-                <input type="text" id="current_medication" name="current_medication" placeholder="Enter medication">
 
                 <button type="button" onclick="showResults()">Predict</button>
             </form>
         </div>
 
         <div class="graph-section">
-            <h2>Diagnosis Result</h2>
-            <h1 id="mainPrediction">Asthma</h1>
+            <h2>진단 결과</h2>
+            <h1 id="mainPrediction">천식</h1>
             <canvas id="barChart" width="400" height="200"></canvas>
 
             <div class="scrollable-results">
                 <table>
                     <thead>
                         <tr>
-                            <th>Dignosis</th>
-                            <th>Confidence (%)</th>
-                            <th>Notes</th>
+                            <th>진단명</th>
+                            <th>신뢰도 (%)</th>
+                            <th>참고고</th>
                         </tr>
                     </thead>
                     <tbody id="resultsTable">
@@ -154,6 +177,18 @@
                 </table>
             </div>
         </div>
+        <div class="chat-section">
+            <h2>Doctor-Patient Conversation</h2>
+            <div class="chat-box">
+                <p><strong>Doctor:</strong> Can you tell me your symptoms?</p>
+                <p><strong>Patient:</strong> I have a fever of <strong>40°C</strong> and a severe headache.</p>
+                <p><strong>Doctor:</strong> Are you taking any medications?</p>
+                <p><strong>Patient:</strong> No, I am not taking anything right now.</p>
+                <p><strong>Doctor:</strong> Let’s run some tests to check for <strong>viral infections</strong>.</p>
+                <p><strong>Patient:</strong> Okay, thank you.</p>
+            </div>
+        </div>
+        
     </div>
 
     <div class="footer-note">
@@ -188,12 +223,12 @@
                 const confidence = asthmaPredictions[condition];
                 let note;
 
-                if (condition === "Asthma"){
-                    note = "Primary Dignosis";
+                if (condition === "천식"){
+                    note = "주요 진단";
                 } else if (confidence >0.1){ //10% 이상일 경우
-                    note ="Likely Related Condition";
+                    note ="가능성 높은 질환";
                 } else {
-                    note ="Less Likely Condition";
+                    note ="가능성 낮은 질환";
                 }
 
                 const row = `
@@ -225,8 +260,8 @@
                     datasets: [{
                         label: 'Confidence (%)',
                         data: chartData,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(128, 0, 128, 0.3)', //연보라
+                        borderColor: 'rgba(128, ,0, 128, 1)',   //진보라라
                         borderWidth: 1
                     }]
                 },
