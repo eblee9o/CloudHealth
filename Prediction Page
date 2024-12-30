@@ -178,22 +178,29 @@
             </div>
         </div>
         <div class="chat-section">
-            <h2>Doctor-Patient Conversation</h2>
+            <h2>대화 기록</h2>
             <div class="chat-box">
-                <p><strong>Doctor:</strong> Can you tell me your symptoms?</p>
-                <p><strong>Patient:</strong> I have a fever of <strong>40°C</strong> and a severe headache.</p>
-                <p><strong>Doctor:</strong> Are you taking any medications?</p>
-                <p><strong>Patient:</strong> No, I am not taking anything right now.</p>
-                <p><strong>Doctor:</strong> Let’s run some tests to check for <strong>viral infections</strong>.</p>
-                <p><strong>Patient:</strong> Okay, thank you.</p>
+                <p><strong>Doctor:</strong> What brings you in today?</p>
+                <p><strong>Patient:</strong> I've been having trouble breathing for the past two days.</p>
+                <p><strong>Doctor:</strong> I see. Do you feel this happens more when you're <strong>active</strong>, or even while <strong>resting</strong>?</p>
+                <p><strong>Patient:</strong> It’s worse when I’m <strong>moving around</strong>, but even <strong>resting</strong> hasn’t helped much.</p>
+                <p><strong>Doctor:</strong> Have you experienced any <strong>chest tightness</strong> or <strong>wheezing</strong> along with it?</p>
+                <p><strong>Patient:</strong> Yes, my chest feels <strong>tight</strong>, and there’s a slight <strong>wheezing</strong> sound when I breathe.</p>
+                <p><strong>Doctor:</strong> Do you have any known <strong>allergies</strong> or a history of <strong>asthma</strong>?</p>
+                <p><strong>Patient:</strong> No, I’ve never been diagnosed with asthma, but I do have <strong>seasonal allergies</strong>.</p>
+                <p><strong>Doctor:</strong> I understand. Have you noticed anything that might <strong>trigger these symptoms</strong>, like <strong>dust</strong> or <strong>cold air</strong>?</p>
+                <p><strong>Patient:</strong> It started after I was outside in the <strong>cold</strong> for a long time.</p>
+                <p><strong>Doctor:</strong> That could be a factor. I’d like to <strong>listen to your lungs</strong> and check your <strong>oxygen levels</strong>. After that, we may run some additional tests to rule out <strong>asthma</strong> or other <strong>respiratory issues</strong>.</p>
+                <p><strong>Patient:</strong> Alright, thank you.</p>
             </div>
+            
+                    
+                </div>
+                
         </div>
         
     </div>
 
-    <div class="footer-note">
-        Execution Time: 244ms | Request Time: 2024-12-12 06:15:11 PM
-    </div>
 
     <script>
         // JSON 데이터 (제공된 데이터 기반)
@@ -260,8 +267,26 @@
                     datasets: [{
                         label: 'Confidence (%)',
                         data: chartData,
-                        backgroundColor: 'rgba(128, 0, 128, 0.3)', //연보라
-                        borderColor: 'rgba(128, ,0, 128, 1)',   //진보라라
+                        backgroundColor: labels.map((label, index) => {
+                            if (index === 0) {
+                                //가장 높은 그래프는 눈에 띄는 색상
+                                return 'rgba(255, 99, 132, 0.5)'; // 빨간색
+                            } else if (index ===1){
+                                //나머지 그래프는 비슷한 계열 색상
+                                return 'rgba(54, 162, 235, 0.5)'; // 파란색
+                            } else {
+                                return 'rgba(75, 192, 192, 0.5)'; // 청록색
+                            }
+                        }),
+                        borderColor: labels.map((label, index) => {
+                            if (index === 0) {
+                                return 'rgba(255, 99, 132, 1)'; // 빨간색 테두리
+                            } else if (index === 1) {
+                                return 'rgba(54, 162, 235, 1)'; // 파란색 테두리
+                            } else {
+                                return 'rgba(75, 192, 192, 1)'; // 청록색 테두리
+                            }
+                        }),
                         borderWidth: 1
                     }]
                 },
