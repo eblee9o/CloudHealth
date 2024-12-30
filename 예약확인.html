@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 확인 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: none;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>예약 확인</h1>
+
+    <div class="form-group">
+        <label for="reservationId">예약 번호</label>
+        <input type="text" id="reservationId" placeholder="예약 번호를 입력하세요">
+    </div>
+
+    <button onclick="checkReservation()">예약 확인</button>
+
+    <div class="result" id="result">
+        <h3>예약 정보</h3>
+        <p><strong>예약 번호:</strong> <span id="reservationNumber"></span></p>
+        <p><strong>예약자 이름:</strong> <span id="customerName"></span></p>
+        <p><strong>예약 날짜:</strong> <span id="reservationDate"></span></p>
+    </div>
+
+    <div class="error" id="errorMessage"></div>
+</div>
+
+<script>
+    // 예약 번호와 해당 정보를 저장한 객체
+    const reservations = {
+        "R12345": {
+            name: "홍길동",
+            date: "2024-12-30"
+        },
+        "R67890": {
+            name: "김유리",
+            date: "2024-12-31"
+        },
+        "R11223": {
+            name: "박지민",
+            date: "2025-01-05"
+        }
+    };
+
+    // 예약 번호를 입력하면 예약 정보 확인
+    function checkReservation() {
+        const reservationId = document.getElementById("reservationId").value.trim();
+        const resultDiv = document.getElementById("result");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // 결과와 에러 메시지 초기화
+        resultDiv.style.display = "none";
+        errorMessage.textContent = "";
+
+        // 예약 번호가 입력되었는지 확인
+        if (reservationId === "") {
+            errorMessage.textContent = "예약 번호를 입력해 주세요.";
+            return;
+        }
+
+        // 예약 번호가 존재하는지 확인
+        if (reservations[reservationId]) {
+            const reservation = reservations[reservationId];
+            document.getElementById("reservationNumber").textContent = reservationId;
+            document.getElementById("customerName").textContent = reservation.name;
+            document.getElementById("reservationDate").textContent = reservation.date;
+            resultDiv.style.display = "block";
+        } else {
+            errorMessage.textContent = "입력하신 예약 번호는 존재하지 않습니다.";
+        }
+    }
+</script>
+
+</body>
+</html>

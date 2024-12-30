@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Klinik - Clinic Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>4thomol</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="doctor-main.html" class="nav-item nav-link active">Home</a>
+                <a href="예약.html" class="nav-item nav-link">예약</a>
+                <a href="검사.html" class="nav-item nav-link">검사</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">진료과</a>
+                    <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+                        <a href="내과(3).html" class="dropdown-item">내과</a>
+                        <a href="외과(3).html" class="dropdown-item">외과</a>
+                        <a href="appointment.html" class="dropdown-item">흉부외과</a>
+                        <a href="testimonial.html" class="dropdown-item">신경외과</a>
+                        <a href="404.html" class="dropdown-item">산부인과</a>
+                    </div>
+                </div>
+                <a href="일정.html" class="nav-item nav-link">일정</a>
+            </div>
+            <a href="doctor-chart.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">차트 입력<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+<br><br>
+<div class="reservation-container">
+		<form class="reservation-form" action="/submit-reservation" method="POST">
+			<h2>Reservation</h2>
+			<div class="form-group">
+				<label for="name">환자이름 </label>
+				<input type="text" id="name" name="name" placeholder="Enter your full name" required>
+			</div>
+			<div class="form-group">
+				<label for="phone">전화번호</label>
+				<input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+			</div>
+			<div class="form-group">
+				<label for="date">예약 날짜</label>
+				<input type="date" id="date" name="date" required>
+			</div>
+			<div class="form-group">
+				<label for="time">예약 시간</label>
+				<input type="time" id="time" name="time" required>
+			</div>
+			<div class="form-group">
+				<label for="guests">진료과   </label>
+				<select id="guests" name="guests" required>
+					<option value="">Select</option>
+					<option value="1">내과</option>
+					<option value="2">외과</option>
+					<option value="3">흉부외과</option>
+					<option value="4">신경외과</option>
+					<option value="5">산부인과</option>
+				</select>
+				<div class="form-group">
+					<label for="name">담당의 </label>
+					<input type="text" id="name" name="name" placeholder=" " required>
+				</div>
+			</div>
+		</br>
+			<div class="form-actions">
+				<button type="submit">Submit Reservation</button>
+			</div>
+		</form>
+
+	<div class="container">
+		<h1> </h1>
+		<table>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Department</th>
+
+				</tr>
+			</thead>
+			<tbody id="reservation-table-body">
+				<!-- Reservation rows will be dynamically inserted here -->
+			</tbody>
+		</table>
+		<div class="no-reservations" id="no-reservations">
+			No reservations available.
+		</div>
+	</div>
+</div>
+<script>
+	// Example reservation data
+	const reservations = [
+		{ id: 1, name: "홍길동", email: "john@naver.com", phone: "010-456-7890", date: "2024-12-26", time: "19:00", department: "내과" },
+		{ id: 2, name: "김길동", email: "jane@google.com", phone: "010-654-3210", date: "2024-12-27", time: "20:00", department: "내과" },
+		{ id: 3, name: "이길동", email: "alice@naver.com", phone: "010-789-1234", date: "2024-12-28", time: "18:30", department: "흉부외과" },
+		{ id: 4, name: "박길동", email: "bob@daum.com", phone: "010-123-4567", date: "2024-12-29", time: "17:45", department: "외과" },
+		{ id: 5, name: "최길동", email: "charlie@naver.com", phone: "010-654-9870", date: "2024-12-30", time: "19:15", department: "산부인과" },
+		{ id: 6, name: "오길동", email: "diana@daum.com", phone: "010-321-0987", date: "2024-12-31", time: "20:30", department: "신경외과" },
+		{ id: 7, name: "한길동", email: "evan@google.com", phone: "010-123-4560", date: "2024-12-31", time: "18:00", department: "외과" }
+	];
+
+	const tableBody = document.getElementById('reservation-table-body');
+	const noReservations = document.getElementById('no-reservations');
+
+	if (reservations.length > 0) {
+		noReservations.style.display = 'none';
+		reservations.forEach(reservation => {
+			const row = document.createElement('tr');
+			row.innerHTML = `
+				<td>${reservation.id}</td>
+				<td>${reservation.name}</td>
+				<td>${reservation.email}</td>
+				<td>${reservation.phone}</td>
+				<td>${reservation.date}</td>
+				<td>${reservation.time}</td>
+				<td>${reservation.department}</td>
+			`;
+			tableBody.appendChild(row);
+		});
+	} else {
+		noReservations.style.display = 'block';
+	}
+</script>
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

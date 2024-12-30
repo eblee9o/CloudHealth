@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Klinik - Clinic Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h1 class="m-0 text-primary"><i class="far fa-hospital me-3"></i>4thomol</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="doctor-main.html" class="nav-item nav-link active">Home</a>
+                <a href="예약.html" class="nav-item nav-link">예약</a>
+                <a href="검사.html" class="nav-item nav-link">검사</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">진료과</a>
+                    <div class="dropdown-menu rounded-0 rounded-bottom m-0">
+                        <a href="내과(3).html" class="dropdown-item">내과</a>
+                        <a href="외과(3).html" class="dropdown-item">외과</a>
+                        <a href="appointment.html" class="dropdown-item">흉부외과</a>
+                        <a href="testimonial.html" class="dropdown-item">신경외과</a>
+                        <a href="404.html" class="dropdown-item">산부인과</a>
+                    </div>
+                </div>
+                <a href="일정.html" class="nav-item nav-link">일정</a>
+            </div>
+            <a href="doctor-chart.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">차트 입력<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+<br><br>
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원 환자 리스트</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- 환자 리스트 -->
+        <div class="patient-list">
+            <h2>환자 검사결과</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>이름</th>
+                        <th>생년월일</th>
+                        <th>예약 날짜</th>
+                        <th>상세보기</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>홍길동</td>
+                        <td>1990-01-01</td>
+                        <td>2024-12-26</td>
+                        <td><button class="btn btn-primary" onclick="showResults(1)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>김길동</td>
+                        <td>1985-05-15</td>
+                        <td>2024-12-27</td>
+                        <td><button class="btn btn-primary" onclick="showResults(2)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>이길동</td>
+                        <td>1980-03-25</td>
+                        <td>2024-12-28</td>
+                        <td><button class="btn btn-primary" onclick="showResults(3)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>박길동</td>
+                        <td>1995-07-10</td>
+                        <td>2024-12-29</td>
+                        <td><button class="btn btn-primary" onclick="showResults(4)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>최길동</td>
+                        <td>1992-11-22</td>
+                        <td>2024-12-30</td>
+                        <td><button class="btn btn-primary" onclick="showResults(5)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>오길동</td>
+                        <td>1988-02-14</td>
+                        <td>2024-12-31</td>
+                        <td><button class="btn btn-primary" onclick="showResults(6)">검사 결과 보기</button></td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>한길동</td>
+                        <td>1998-09-05</td>
+                        <td>2024-12-26</td>
+                        <td><button class="btn btn-primary" onclick="showResults(7)">검사 결과 보기</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 모달 창: 검사 결과 표시 -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultModalLabel">검사 결과지</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5 id="patientName">홍길동</h5>
+                    <p>검사일: <span id="testDate">2024년 12월 26일</span></p>
+
+                    <h6>검사 결과</h6>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>검사 항목</th>
+                                <th>결과</th>
+                                <th>정상 범위</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultTable">
+                            <!-- 검사 항목은 JavaScript로 동적으로 삽입 -->
+                        </tbody>
+                    </table>
+
+                    <p>담당 의사: <span id="doctorName">김의사</span></p>
+                    <p>병원 연락처: 010-1234-5678</p>
+                    <p>병원 주소: 서울시 강남구 병원로 123</p>
+                    
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const patientData = {
+            1: {
+                name: "홍길동",
+                date: "2024-12-26",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            2: {
+                name: "김길동",
+                date: "2024-12-27",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            3: {
+                name: "이길동",
+                date: "2024-12-28",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            4: {
+                name: "박길동",
+                date: "2024-12-29",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            5: {
+                name: "최길동",
+                date: "2024-12-30",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            6: {
+                name: "오길동",
+                date: "2024-12-31",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+            7: {
+                name: "한길동",
+                date: "2024-12-31",
+                results: [
+                    { test: "혈압", result: "120/80 mmHg", normalRange: "90/60 ~ 120/80 mmHg", comment: "정상" },
+                    { test: "혈당", result: "200 mg/dL", normalRange: "70 ~ 100 mg/dL", comment: "고혈당" },
+                    { test: "콜레스테롤", result: "180 mg/dL", normalRange: "140 ~ 200 mg/dL", comment: "정상" },
+                    { test: "간 기능", result: "45 U/L", normalRange: "10 ~ 40 U/L", comment: "간 수치 상승" },
+                    { test: "신장 기능", result: "0.9 mg/dL", normalRange: "0.6 ~ 1.2 mg/dL", comment: "정상" },
+                    { test: "혈액형", result: "A형", normalRange: "A형, B형, O형, AB형", comment: "정상" },
+                    { test: "비타민 D", result: "15 ng/mL", normalRange: "20 ~ 50 ng/mL", comment: "비타민 D 부족" },
+                ],
+                doctor: "김의사"
+            },
+        };
+
+        function showResults(patientId) {
+            const patient = patientData[patientId];
+            document.getElementById("patientName").innerText = patient.name;
+            document.getElementById("testDate").innerText = patient.date;
+            document.getElementById("doctorName").innerText = patient.doctor;
+
+            const resultTable = document.getElementById("resultTable");
+            resultTable.innerHTML = "";
+            patient.results.forEach(result => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${result.test}</td><td>${result.result}</td><td>${result.normalRange}</td><td>${result.comment}</td>`;
+                resultTable.appendChild(row);
+            });
+
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+        }
+    </script>
+</body>
+
+</html>
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

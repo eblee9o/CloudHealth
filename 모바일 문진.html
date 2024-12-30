@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원 모바일 문진</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .note {
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>병원 문진표</h1>
+    
+    <!-- 환자 기본 정보 -->
+    <form id="medicalForm">
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">연락처</label>
+            <input type="tel" id="phone" name="phone" placeholder="연락처를 입력하세요" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+        </div>
+
+        <!-- 증상 및 병력 -->
+        <div class="form-group">
+            <label for="symptoms">주요 증상</label>
+            <textarea id="symptoms" name="symptoms" rows="4" placeholder="주요 증상을 적어주세요" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="medicalHistory">과거 병력</label>
+            <textarea id="medicalHistory" name="medicalHistory" rows="4" placeholder="과거 병력이나 수술 경험이 있으면 작성해 주세요"></textarea>
+        </div>
+
+        <!-- 알레르기 여부 -->
+        <div class="form-group">
+            <label for="allergies">알레르기 여부</label>
+            <select id="allergies" name="allergies">
+                <option value="">선택하세요</option>
+                <option value="없음">없음</option>
+                <option value="약물">약물</option>
+                <option value="음식">음식</option>
+                <option value="기타">기타</option>
+            </select>
+        </div>
+
+        <!-- 추가 질문 -->
+        <div class="form-group">
+            <label for="additional">추가 질문이나 요청 사항</label>
+            <textarea id="additional" name="additional" rows="4" placeholder="기타 문의 사항이나 요청 사항이 있으면 작성해 주세요"></textarea>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button type="submit">문진표 제출</button>
+    </form>
+
+    <p class="note">제출된 문진표는 병원 담당자가 확인 후 연락드리겠습니다.</p>
+</div>
+
+<script>
+    // 폼 제출 처리
+    document.getElementById('medicalForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // 폼 기본 제출 방지
+
+        // 사용자가 입력한 데이터를 가져오기
+        const formData = new FormData(this);
+
+        let formDetails = '';
+        formData.forEach((value, key) => {
+            formDetails += `${key}: ${value}\n`;
+        });
+
+        alert('문진표가 제출되었습니다:\n\n' + formDetails);
+    });
+</script>
+
+</body>
+</html>
