@@ -7,6 +7,7 @@
 
 <br>
 <h3>구성도</h3>
+
 ![2차 프로젝트_4thomol_0021](https://github.com/user-attachments/assets/f6d4f3ff-f801-4668-8d2c-6172f95afd6d)
 1. 주요 AWS 서비스<br>
 의료 기관은 가족력과 임상 관찰부터 진단 및 약물 치료에 이르기까지 매일 방대한 양의 환자 정보를 수집하고 사용합니다.<br>
